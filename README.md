@@ -1,9 +1,4 @@
 # Predição de Preços de Casas com Redes Neurais
-
-## Trabalho RNA
-
-**Alunos:** Victor Shin Iti Kanazawa Noda, Lara Portilho Marques, João Victor Araujo Costa
-
 ## Descrição do Projeto
 
 Este projeto apresenta a implementação de redes neurais para a predição de preços de casas, utilizando o dataset "House Prices" do Kaggle. O objetivo é aplicar técnicas de aprendizado de máquina para estimar o valor de venda de imóveis residenciais a partir de suas características. O notebook Jupyter (`TrabalhoRNA.ipynb`) inclui as seguintes etapas:
