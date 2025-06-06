@@ -1,76 +1,85 @@
-# Predição de Preços de Casas com Redes Neurais
-## Descrição do Projeto
+# 🧠 House Price Prediction with Neural Networks
 
-Este projeto apresenta a implementação de redes neurais para a predição de preços de casas, utilizando o dataset "House Prices" do Kaggle. O objetivo é aplicar técnicas de aprendizado de máquina para estimar o valor de venda de imóveis residenciais a partir de suas características. O notebook Jupyter (`TrabalhoRNA.ipynb`) inclui as seguintes etapas:
+---
 
-1.  **Carregamento e Análise Exploratória dos Dados**: Importação do dataset, visualização inicial e análise da distribuição da variável alvo (`SalePrice`).
-2.  **Pré-processamento Simplificado**: Limpeza dos dados, preenchimento de valores ausentes (mediana para numéricos, moda para categóricos) e codificação de variáveis categóricas (Label Encoding). A variável alvo `SalePrice` é transformada com `np.log1p` para melhor distribuição.
-3.  **Divisão dos Dados e Normalização**: Os dados são divididos em conjuntos de treino e validação. As features numéricas são normalizadas utilizando `StandardScaler`.
-4.  **Definição da Rede Neural**: É definida uma classe `SimpleNeuralNetwork` em PyTorch, consistindo em camadas lineares com função de ativação ReLU e Dropout para regularização.
-5.  **Função de Treinamento**: Uma função `train_model` é implementada para realizar o loop de treinamento, utilizando o otimizador Adam e a função de perda MSELoss.
-6.  **Configuração e Execução de Experimentos**: São definidas e executadas múltiplas configurações de hiperparâmetros (taxa de aprendizado, número de épocas, arquitetura da rede, dropout, weight decay) para encontrar o melhor modelo.
-7.  **Análise Comparativa e Visualização dos Resultados**: Os resultados dos experimentos são comparados com base em métricas como R² e RMSE. Gráficos das curvas de perda, R² e RMSE são gerados.
-8.  **Salvamento do Melhor Modelo e Predições**: O melhor modelo é salvo e utilizado para gerar predições no dataset de teste do Kaggle, criando um arquivo CSV para submissão.
+## 📖 Project Overview
 
-## Instruções de Execução
+This project details the creation of a neural network to predict housing prices using the well-known **"House Prices" dataset from Kaggle**. The primary goal is to leverage machine learning to accurately estimate the sale price of residential properties from a set of features.
 
-1.  **Ambiente**:
-    * O código foi desenvolvido e testado em Python 3.11.4.
-    * Recomenda-se o uso de um ambiente virtual (ex: venv, conda) para gerenciar as dependências.
+The entire process is documented in a Jupyter Notebook (`TrabalhoRNA.ipynb`) and follows these key steps:
 
-2.  **Bibliotecas Usadas**:
-    * pandas
-    * numpy
-    * matplotlib
-    * seaborn
-    * tqdm
-    * torch (PyTorch)
-    * scikit-learn (sklearn)
-    * datetime (para timestamps nos arquivos de saída)
-    * os (para manipulação de diretórios)
+1.  **Data Loading & EDA**: We begin by loading the dataset and performing an Exploratory Data Analysis (EDA) to understand the features and the distribution of the target variable, `SalePrice`.
+2.  **Simplified Preprocessing**: The data is cleaned by handling missing values (median for numbers, mode for categories) and encoding categorical features using `LabelEncoding`. To better model the target, `SalePrice` is transformed with `np.log1p`.
+3.  **Data Splitting & Normalization**: The dataset is divided into training and validation sets, and all numerical features are normalized using `StandardScaler`.
+4.  **Neural Network Architecture**: A `SimpleNeuralNetwork` class is defined in **PyTorch**, featuring linear layers, ReLU activation, and Dropout for regularization.
+5.  **Model Training**: A `train_model` function orchestrates the training loop, utilizing the Adam optimizer and Mean Squared Error (`MSELoss`) as the loss function.
+6.  **Hyperparameter Tuning**: We run a series of experiments with different hyperparameters (e.g., learning rate, epochs, network architecture, dropout) to identify the optimal model configuration.
+7.  **Results Analysis**: The performance of each experiment is compared using key metrics like **R²** and **RMSE**. The training history (loss, R², RMSE) is visualized with plots.
+8.  **Prediction & Submission**: The best-performing model is saved and used to generate predictions on the Kaggle test set, producing a `submission.csv` file.
 
-    Para instalar as dependências, você pode usar o pip:
-    ```bash
-    pip install pandas numpy matplotlib seaborn tqdm torch scikit-learn
-    ```
+---
 
-3.  **Arquivos do Dataset**:
-    * Certifique-se de que os arquivos `train.csv` e `test.csv` (do dataset "House Prices" do Kaggle) estejam no mesmo diretório do notebook Jupyter.
+## 🚀 Getting Started
 
-4.  **Execução do Notebook**:
-    * Abra o arquivo `TrabalhoRNA.ipynb` em um ambiente Jupyter Notebook ou JupyterLab.
-    * Execute as células na ordem em que aparecem.
-    * Os hiperparâmetros para os diferentes experimentos estão definidos em uma célula específica (célula de código 15).
-    * A semente de números aleatórios (`SEED = 42`) é configurada no início para garantir a reprodutibilidade.
+### **1. Environment Setup**
 
-5.  **Saídas**:
-    * Uma pasta chamada `resultados_modelos/` será criada no mesmo diretório do notebook.
-    * Dentro desta pasta, serão salvos:
-        * `comparacao_modelos.csv`: Tabela com as métricas de todos os experimentos.
-        * `comparacao_visual.png`: Gráficos comparando as curvas de perda, R² e RMSE dos experimentos.
-        * `melhor_modelo_[timestamp].pth`: O estado do melhor modelo treinado.
-        * `predicoes_melhor_modelo_[timestamp].csv`: Predições do melhor modelo no dataset de treino original.
-        * `submissao_kaggle_[timestamp].csv`: Arquivo de submissão para o Kaggle com as predições no dataset de teste.
+* This project was developed and tested using **Python 3.11.4**.
+* Using a virtual environment (like `venv` or `conda`) is highly recommended.
 
-## Detalhes dos Experimentos e Melhor Modelo
+### **2. Required Libraries**
 
-O notebook testa várias configurações de rede neural, variando:
-* Número de camadas ocultas e neurônios por camada.
-* Taxa de aprendizado (`learning_rate`).
-* Número de épocas (`num_epochs`).
-* Taxa de dropout (`dropout_rate`).
-* Decaimento de peso (`weight_decay`).
+* `pandas`
+* `numpy`
+* `matplotlib`
+* `seaborn`
+* `tqdm`
+* `torch` (PyTorch)
+* `scikit-learn`
 
-O melhor modelo é selecionado com base no R² Score no conjunto de validação. Os hiperparâmetros do melhor modelo encontrado ("modelo\_l") foram:
-* **Arquitetura (`hidden_sizes`)**: [128, 64]
-* **Taxa de Aprendizado (`learning_rate`)**: 0.01
-* **Número de Épocas (`num_epochs`)**: 500
-* **Dropout (`dropout_rate`)**: 0.2
-* **Weight Decay (`weight_decay`)**: 0.0005
+You can install all dependencies with a single command:
 
-## Observações
+```bash
+pip install pandas numpy matplotlib seaborn tqdm torch scikit-learn
+```
 
-* A única biblioteca de autograd permitida e utilizada foi o PyTorch.
-* O treinamento do melhor modelo foi significativamente rápido (1.6 segundos), bem abaixo do limite de 1 hora.
-* O código está modularizado em funções para pré-processamento e treinamento.
-* O carregamento dos dados para o treinamento não é feito em batches, mas sim com o dataset de treino completo de uma vez.
+### **3. Dataset**
+
+Ensure the `train.csv` and `test.csv` files from the Kaggle competition are located in the same directory as your notebook.
+
+### **4. Execution**
+
+* Open and run the `TrabalhoRNA.ipynb` notebook in a Jupyter environment.
+* Execute the cells sequentially.
+* A random seed (`SEED = 42`) is used to ensure the results are reproducible.
+
+### **5. Project Outputs**
+
+A new directory named `resultados_modelos/` will be created to store:
+
+* `comparacao_modelos.csv`: A summary table of performance metrics for all models.
+* `comparacao_visual.png`: Comparative plots of the training curves.
+* `melhor_modelo_[timestamp].pth`: The saved weights of the best model.
+* `submissao_kaggle_[timestamp].csv`: The final prediction file for Kaggle submission.
+
+---
+
+## 🏆 Best Model Performance
+
+The notebook systematically tests various configurations to find the most effective model. The best model, named `"modelo_l"`, was identified based on the highest **R² Score** on the validation data.
+
+Its optimal hyperparameters were:
+
+* **Architecture (`hidden_sizes`)**: `[128, 64]`
+* **Learning Rate (`learning_rate`)**: `0.01`
+* **Epochs (`num_epochs`)**: `500`
+* **Dropout Rate (`dropout_rate`)**: `0.2`
+* **Weight Decay (`weight_decay`)**: `0.0005`
+
+---
+
+## 💡 Additional Notes
+
+* **PyTorch** was the exclusive autograd library used for this project.
+* The model training was exceptionally efficient, with the best model training in just **1.6 seconds**.
+* The code is structured with modular functions for preprocessing and training to enhance readability and maintainability.
+* For simplicity, the entire training dataset is loaded into memory at once rather than being processed in batches.
